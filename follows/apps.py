@@ -1,9 +1,12 @@
 from django.apps import AppConfig
 
+from common import EventBus
+from .subscribers import UserCreatedSubscriber, UserSubscriber
+
 
 class FollowsConfig(AppConfig):
     name = 'follows'
 
     def ready(self):
-        # DANGER! IF THIS IMPORT IS REMOVED LISTENERS WON'T WORK! NEVER USE AUTOFORMAT HERE!
-        from . import subscribers
+        EventBus.subscribe(UserCreatedSubscriber)
+        EventBus.subscribe(UserSubscriber)

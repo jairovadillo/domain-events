@@ -1,10 +1,9 @@
-from common import SubscriberMeta
 from users.events import UserCreatedEvent, UserDeletedEvent
 
 from .repositories import FollowsRepo
 
 
-class UserCreatedSubscriber(metaclass=SubscriberMeta):
+class UserCreatedSubscriber:
     subscribe_to = [UserCreatedEvent]
 
     @staticmethod
@@ -13,7 +12,7 @@ class UserCreatedSubscriber(metaclass=SubscriberMeta):
         print("Hello from follows! {}".format(event.user_id))
 
 
-class UserSubscriber(metaclass=SubscriberMeta):
+class UserSubscriber:
     subscribe_to = [UserDeletedEvent, UserCreatedEvent]
 
     @staticmethod
